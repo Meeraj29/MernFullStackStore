@@ -71,29 +71,49 @@ export default function Cart() {
         setShowAddressForm(true);
     };
     const handleCheckout = () => {
-        const selectedAddr = user.addresses.find(a => a._id === selectedAddressId);
-        if (!selectedAddr) {
-            alert("Please select an address.");
-            return;
-        }
-
-        const subtotal = cart.products.reduce((acc, item) => acc + (item.productId.price * item.quantity), 0);
-        const gstAmount = subtotal * 0.18;
-        const grandTotal = Math.round((subtotal + gstAmount) * 100) / 100;
-
-        // Navigate to payment page with order details
-        navigate("/payment", {
-            state: {
-                selectedAddr,
-                products: cart.products.map(item => ({
-                    productId: item.productId._id,
-                    quantity: item.quantity,
-                    price: item.productId.price
-                })),
-                totalAmount: grandTotal,
-                paymentMethod: paymentMethod
+        try {
+            const selectedAddr = user.addresses.find(a => a._id === selectedAddressId);
+            if (!selectedAddr) {
+                alert("Please select a shipping address.");
+                return;
             }
-        });
+
+            if (!cart?.products || cart.products.length === 0) {
+                alert("Your cart is empty.");
+                return;
+            }
+
+            const subtotal = cart.products.reduce((acc, item) => {
+                const price = item.productId?.price || 0;
+                return acc + (price * item.quantity);
+            }, 0);
+
+            if (subtotal <= 0) {
+                alert("Invalid cart total. Please check your items.");
+                return;
+            }
+
+            const gstAmount = subtotal * 0.18;
+            const grandTotal = Math.round((subtotal + gstAmount) * 100) / 100;
+
+            console.log("Proceeding to payment:", { subtotal, grandTotal, paymentMethod });
+
+            navigate("/payment", {
+                state: {
+                    selectedAddr,
+                    products: cart.products.map(item => ({
+                        productId: item.productId?._id || item.productId,
+                        quantity: item.quantity,
+                        price: item.productId?.price || 0
+                    })),
+                    totalAmount: grandTotal,
+                    paymentMethod: paymentMethod
+                }
+            });
+        } catch (error) {
+            console.error("Checkout error:", error);
+            alert("An error occurred during checkout. Please try again.");
+        }
     };
 
     if (loading) {
@@ -250,12 +270,17 @@ export default function Cart() {
                                 <span className="font-bold text-gray-900">Total</span>
                                 <span className="text-2xl font-bold text-gray-900">₹{grandTotal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                             </div>
+                            {!selectedAddressId && user?.addresses?.length > 0 && (
+                                <p className="text-[10px] font-bold text-amber-600 mb-4 bg-amber-50 p-2 rounded-lg text-center uppercase tracking-wider">
+                                     Please click an address above to select it
+                                 </p>
+                            )}
                             <button
                                 onClick={handleCheckout}
                                 disabled={isPlacing || !selectedAddressId}
-                                className="w-full bg-indigo-600 text-white py-4 rounded-xl font-bold hover:bg-indigo-700 transition-all disabled:opacity-20 shadow-lg shadow-indigo-100"
+                                className="w-full bg-indigo-600 text-white py-4 rounded-xl font-bold hover:bg-indigo-700 transition-all disabled:opacity-30 disabled:cursor-not-allowed shadow-lg shadow-indigo-100"
                             >
-                                {isPlacing ? "Placing Order..." : "Place Order"}
+                                {isPlacing ? "Placing Order..." : (!selectedAddressId ? "Select Address to Continue" : "Place Order")}
                             </button>
                         </motion.div>
                     </div>

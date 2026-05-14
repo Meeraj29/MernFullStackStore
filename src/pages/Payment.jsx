@@ -28,6 +28,7 @@ export default function Payment() {
             const fullAddressString = `${selectedAddr.street}, ${selectedAddr.city}, ${selectedAddr.state} ${selectedAddr.zipCode}`;
 
             if (state.paymentMethod === "COD") {
+                console.log("Placing COD order...");
                 // Direct Order Placement for COD
                 const { data } = await api.post("orders/place", {
                     address: fullAddressString,
@@ -35,6 +36,7 @@ export default function Payment() {
                     paymentMethod: "COD"
                 });
 
+                console.log("COD Order Response:", data);
                 if (clearCart) await clearCart();
                 navigate("/order-success", { state: { orderId: data.order._id } });
                 return;
