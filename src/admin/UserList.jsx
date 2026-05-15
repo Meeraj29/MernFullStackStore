@@ -115,7 +115,7 @@ export default function UserList() {
                             <tr key={user._id} className="hover:bg-gray-50/30 transition-colors">
                                 <td className="px-6 py-5">
                                     <div className="flex items-center gap-3">
-                                        <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-indigo-50 to-fuchsia-50 flex items-center justify-center text-indigo-600 font-black text-xs border border-indigo-100">
+                                        <div className="h-10 w-10 rounded-xl bg-linear-to-br from-indigo-50 to-fuchsia-50 flex items-center justify-center text-indigo-600 font-black text-xs border border-indigo-100">
                                             {user.name.charAt(0).toUpperCase()}
                                         </div>
                                         <div>
@@ -184,7 +184,7 @@ export default function UserList() {
 
             {/* Direct Email Modal */}
             {showEmailModal && (
-                <div className="fixed inset-0 bg-gray-900/40 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+                <div className="fixed inset-0 bg-gray-900/40 backdrop-blur-sm z-100 flex items-center justify-center p-4">
                     <div className="bg-white w-full max-w-md rounded-[2.5rem] shadow-2xl border border-gray-100 overflow-hidden animate-in zoom-in duration-300">
                         <div className="p-8 bg-indigo-600 text-white flex justify-between items-center">
                             <div>

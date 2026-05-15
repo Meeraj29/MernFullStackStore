@@ -178,7 +178,7 @@ export default function AdminLogs() {
                                 </div>
 
                                 <div className="flex items-center gap-4">
-                                    <div className="w-20 h-20 bg-gray-50 rounded-2xl border border-gray-100 flex-shrink-0 overflow-hidden">
+                                    <div className="w-20 h-20 bg-gray-50 rounded-2xl border border-gray-100 shrink-0 overflow-hidden">
                                         <img 
                                             src={Array.isArray(selectedProduct.image) ? selectedProduct.image[0] : selectedProduct.image} 
                                             alt="" 

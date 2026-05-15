@@ -39,6 +39,8 @@ function Layout() {
 import { CartProvider } from "./context/CartContext";
 import { AuthProvider } from "./context/AuthContext";
 import { WishlistProvider } from "./context/WishlistContext";
+import { NotificationProvider } from "./context/NotificationContext";
+import { ThemeProvider } from "./context/ThemeContext";
 import Profile from "./pages/Profile";
 import AdminProfile from "./admin/AdminProfile";
 import AdminAccount from "./admin/AdminAccount";
@@ -55,7 +57,9 @@ import GiveAccess from "./admin/GiveAccess";
 import AdminReports from "./admin/AdminReports";
 import AdminAnalytics from "./admin/AdminAnalytics";
 import BulkUpload from "./admin/BulkUpload";
+import RevokeAccess from "./admin/RevokeAccess";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { Toaster } from "sonner";
 
 const router = createBrowserRouter([
     {
@@ -127,6 +131,7 @@ const router = createBrowserRouter([
                             { path: "reports", element: <AdminReports /> },
                             { path: "analytics", element: <AdminAnalytics /> },
                             { path: "bulk-upload", element: <BulkUpload /> },
+                            { path: "revoke-access", element: <RevokeAccess /> },
                         ]
                     }
                 ]
@@ -137,12 +142,17 @@ const router = createBrowserRouter([
 
 export default function App() {
     return (
-        <AuthProvider>
+        <ThemeProvider>
+            <AuthProvider>
             <WishlistProvider>
                 <CartProvider>
-                    <RouterProvider router={router} />
+                    <NotificationProvider>
+                        <Toaster position="top-center" richColors />
+                        <RouterProvider router={router} />
+                    </NotificationProvider>
                 </CartProvider>
             </WishlistProvider>
         </AuthProvider>
+        </ThemeProvider>
     );
 }

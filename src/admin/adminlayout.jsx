@@ -1,6 +1,9 @@
 import { Outlet, Link, useLocation } from "react-router";
-import { LayoutDashboard, ShoppingBag, PlusCircle, ArrowLeft, LogOut, UserCircle, History, Users, Key, ShoppingCart, FileBarChart, BarChart3 } from "lucide-react";
+import { LayoutDashboard, ShoppingBag, PlusCircle, ArrowLeft, LogOut, UserCircle, History, Users, Key, ShoppingCart, FileBarChart, BarChart3, ShieldOff, Bell, Search } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
+import { useNotifications } from "../context/NotificationContext";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const sidebarItems = [
     { name: "Dashboard", path: "/admin/profile", icon: LayoutDashboard },
@@ -12,6 +15,7 @@ const sidebarItems = [
     { name: "Bulk Upload", path: "/admin/bulk-upload", icon: PlusCircle },
     { name: "Logs", path: "/admin/logs", icon: History },
     { name: "Give Access", path: "/admin/give-access", icon: Key },
+    { name: "Revoke Access", path: "/admin/revoke-access", icon: ShieldOff },
     { name: "Reports", path: "/admin/reports", icon: FileBarChart },
     { name: "Account", path: "/admin/account", icon: UserCircle },
 ];
@@ -19,6 +23,8 @@ const sidebarItems = [
 export default function AdminLayout() {
     const location = useLocation();
     const { user, logout } = useAuth();
+    const { notifications, unreadCount, markAsRead, clearAll } = useNotifications();
+    const [showNotifications, setShowNotifications] = useState(false);
 
     const filteredSidebarItems = sidebarItems.filter(item => {
         // Always show the Account tab for every admin/staff so they can manage their profile
@@ -35,9 +41,10 @@ export default function AdminLayout() {
             "All Products": "Products",
             "Add Product": "Add Product",
             "Orders": "Orders",
-            "Bulk Upload": "Products",
+            "Bulk Upload": "Bulk Upload",
             "Logs": "Logs",
             "Give Access": "Give Access",
+            "Revoke Access": "Revoke Access",
             "Reports": "Reports",
             "Account": "Account"
         };
@@ -48,7 +55,7 @@ export default function AdminLayout() {
     return (
         <div className="flex min-h-screen bg-gray-50">
             {/* Sidebar */}
-            <aside className="w-64 bg-white border-r border-gray-100 flex flex-col hidden md:flex fixed h-full">
+            <aside className="w-64 bg-white border-r border-gray-100  flex-col hidden md:flex fixed h-full">
                 <div className="p-8">
                     <h2 className="text-xl font-black italic tracking-tighter uppercase text-indigo-600">Nexus <span className="text-gray-900">Admin</span></h2>
                 </div>
@@ -98,12 +105,14 @@ export default function AdminLayout() {
                 </div>
             </aside>
 
-            {/* Main Content */}
-            <main className="flex-1 md:ml-64 p-8">
-                <div className="max-w-7xl mx-auto">
-                    <Outlet />
-                </div>
-            </main>
+            {/* Main Content Area */}
+            <div className="flex-1 md:ml-64 flex flex-col min-h-screen">
+                <main className="p-8">
+                    <div className="max-w-7xl mx-auto">
+                        <Outlet />
+                    </div>
+                </main>
+            </div>
         </div>
     );
 }

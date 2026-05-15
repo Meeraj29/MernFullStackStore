@@ -15,7 +15,7 @@ export default function Productdetails() {
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [status, setStatus] = useState({ message: "", type: "" });
-    
+
     // Sharing states
     const [showShare, setShowShare] = useState(false);
     const [recipientEmail, setRecipientEmail] = useState("");
@@ -102,7 +102,7 @@ export default function Productdetails() {
                                 </h1>
                                 <button
                                     onClick={() => toggleWishlist(product._id)}
-                                    className={`p-3 rounded-full flex-shrink-0 transition-all ${isInWishlist(product._id) ? "bg-rose-50 text-rose-500" : "bg-gray-50 text-gray-400 hover:text-rose-500 hover:bg-rose-50"}`}
+                                    className={`p-3 rounded-full  shrink-0 transition-all ${isInWishlist(product._id) ? "bg-rose-50 text-rose-500" : "bg-gray-50 text-gray-400 hover:text-rose-500 hover:bg-rose-50"}`}
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" className={`h-8 w-8 ${isInWishlist(product._id) ? "fill-current" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -193,7 +193,7 @@ export default function Productdetails() {
                                     </svg>
                                     Add to Cart
                                 </button>
-                                
+
                                 <button
                                     onClick={() => setShowShare(!showShare)}
                                     className="flex items-center justify-center bg-white border-2 border-gray-100 text-gray-900 px-8 py-4 rounded-2xl font-bold hover:bg-gray-50 transition-all shadow-sm active:scale-95"
@@ -209,14 +209,14 @@ export default function Productdetails() {
                                 <div className="mt-4 p-6 bg-indigo-50/50 rounded-3xl border border-indigo-100 animate-in slide-in-from-top duration-300">
                                     <p className="text-[10px] font-black text-indigo-600 uppercase tracking-widest mb-3">Send directly to email</p>
                                     <div className="flex gap-2">
-                                        <input 
-                                            type="email" 
+                                        <input
+                                            type="email"
                                             placeholder="Recipient email..."
                                             className="flex-1 bg-white border border-indigo-100 px-4 py-3 rounded-xl text-sm outline-none focus:border-indigo-600 transition-all"
                                             value={recipientEmail}
                                             onChange={(e) => setRecipientEmail(e.target.value)}
                                         />
-                                        <button 
+                                        <button
                                             disabled={sharing}
                                             onClick={handleEmailShare}
                                             className="bg-indigo-600 text-white px-6 py-3 rounded-xl font-bold text-sm hover:bg-indigo-700 transition-all disabled:opacity-50"

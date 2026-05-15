@@ -18,7 +18,12 @@ export default function AdminSignup() {
         e.preventDefault();
         setStatus({ message: "Transmitting data to master node...", type: "info" });
         try {
-            await api.post("auth/register-admin", form);
+            await api.post("auth/signup-admin", {
+                name: form.name,
+                email: form.email,
+                password: form.password,
+                adminSecret: form.adminCode
+            });
             setStatus({ message: "Admin registration successful!", type: "success" });
             setTimeout(() => navigate("/admin/login"), 1500);
         } catch (error) {

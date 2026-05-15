@@ -484,7 +484,7 @@ export default function Profile() {
                 {/* ── Reactivation Payment Modal ── */}
                 <AnimatePresence>
                     {showReactivationModal && selectedOrder && (
-                        <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
+                        <div className="fixed inset-0 z-70 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
                             <motion.div
                                 initial={{ scale: 0.9, opacity: 0, y: 20 }}
                                 animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -492,7 +492,7 @@ export default function Profile() {
                                 className="bg-white w-full max-w-md rounded-[2.5rem] shadow-2xl overflow-hidden"
                             >
                                 {/* Header */}
-                                <div className="relative bg-gradient-to-br from-indigo-600 to-purple-600 p-8 text-white">
+                                <div className="relative bg-linear-to-br from-indigo-600 to-purple-600 p-8 text-white">
                                     <button
                                         onClick={() => setShowReactivationModal(false)}
                                         className="absolute top-5 right-5 bg-white/15 hover:bg-white/25 p-2 rounded-full transition-colors"
@@ -597,7 +597,7 @@ export default function Profile() {
                 {/* Feedback Modal */}
                 <AnimatePresence>
                     {showFeedbackModal && (
-                        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
+                        <div className="fixed inset-0 z-60 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
                             <motion.div
                                 initial={{ scale: 0.9, opacity: 0, y: 20 }}
                                 animate={{ scale: 1, opacity: 1, y: 0 }}

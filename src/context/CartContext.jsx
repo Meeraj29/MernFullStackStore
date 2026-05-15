@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import api from "../api/axios";
+import { toast } from "sonner";
 
 const CartContext = createContext();
 
@@ -70,7 +71,7 @@ export function CartProvider({ children }) {
         try {
             const token = localStorage.getItem("token");
             if (!token) {
-                alert("Please login to add items to cart");
+                toast.error("Please login to add items to cart");
                 return false;
             }
 
@@ -90,9 +91,9 @@ export function CartProvider({ children }) {
 
             if (error.response?.status === 401) {
                 localStorage.removeItem("token");
-                alert("Your session has expired or is invalid. Please login again.");
+                toast.error("Your session has expired. Please login again.");
             } else {
-                alert(message);
+                toast.error(message);
             }
             return false;
         }

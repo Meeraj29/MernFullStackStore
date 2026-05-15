@@ -31,7 +31,7 @@ export default function OrderSuccess() {
                 <div className="absolute inset-0 scale-125 bg-green-100/50 rounded-full animate-ping"></div>
 
                 {/* Success Icon */}
-                <div className="relative h-48 w-48 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-2xl shadow-green-200">
+                <div className="relative h-48 w-48 bg-linear-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-2xl shadow-green-200">
                     <motion.svg 
                         initial={{ pathLength: 0 }}
                         animate={{ pathLength: 1 }}

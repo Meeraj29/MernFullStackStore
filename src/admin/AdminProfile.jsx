@@ -133,15 +133,6 @@ export default function AdminProfile() {
                         Neural link active • System diagnostics online
                     </p>
                 </div>
-                <div className="bg-white px-6 py-3 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
-                    <div className="text-right">
-                        <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Active Admin</p>
-                        <p className="text-sm font-bold text-gray-900">{user?.name}</p>
-                    </div>
-                    <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-black italic">
-                        {user?.name?.charAt(0)}
-                    </div>
-                </div>
             </div>
 
             {/* Low Stock Alerts */}

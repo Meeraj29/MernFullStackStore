@@ -34,8 +34,8 @@ export default function StaffProfile() {
     return (
         <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
             {/* Header / Cover Section */}
-            <div className="relative h-48 rounded-[2.5rem] bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 overflow-hidden shadow-lg">
-                <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
+            <div className="relative h-48 rounded-[2.5rem] bg-linear-to-r from-indigo-600 via-purple-600 to-indigo-600 overflow-hidden shadow-lg">
+                <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
             </div>
 
             <div className="px-8 -mt-24 relative z-10">
@@ -183,7 +183,7 @@ export default function StaffProfile() {
                                             <item.icon size={22} />
                                         </div>
                                         <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">{item.label}</p>
-                                        <p className="text-lg font-bold text-gray-900 break-words">{item.value}</p>
+                                        <p className="text-lg font-bold text-gray-900 wrap-break-words">{item.value}</p>
                                     </div>
                                 ))}
 

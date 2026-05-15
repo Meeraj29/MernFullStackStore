@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import api from "../api/axios";
 import { useAuth } from "./AuthContext";
+import { toast } from "sonner";
 
 const WishlistContext = createContext();
 
@@ -35,15 +36,16 @@ export const WishlistProvider = ({ children }) => {
 
     const toggleWishlist = async (productId) => {
         if (!user) {
-            alert("Please login to manage wishlist");
+            toast.error("Please login to manage wishlist");
             return;
         }
         try {
             const { data } = await api.post("wishlist/toggle", { productId });
             setWishlist(data.wishlist);
+            toast.success("Wishlist updated!");
         } catch (error) {
             console.error("Error toggling wishlist:", error);
-            alert("Failed to update wishlist");
+            toast.error("Failed to update wishlist");
         }
     };
 
